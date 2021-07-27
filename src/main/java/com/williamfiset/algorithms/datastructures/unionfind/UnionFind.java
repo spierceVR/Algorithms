@@ -41,17 +41,18 @@ public class UnionFind {
     // Find the root of the component/set
     int root = p;
     while (root != id[root]) root = id[root];
-
+    // after root is found, p still points to the first element in the chain to the root
+    
     // Compress the path leading back to the root.
     // Doing this operation is called "path compression"
     // and is what gives us amortized time complexity.
     while (p != root) {
-      int next = id[p];
-      id[p] = root;
-      p = next;
+      int next = id[p]; // save p's next pointer
+      id[p] = root; // change p's next pointer to the root, skipping the rest of the chain
+      p = next; // make p point to the saved next pointer (next element in the chain)
     }
 
-    return root;
+    return root; // return the root node
   }
 
   // This is an alternative recursive formulation for the find method
