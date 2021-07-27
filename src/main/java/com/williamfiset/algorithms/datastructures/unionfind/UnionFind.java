@@ -24,10 +24,11 @@ public class UnionFind {
 
     if (size <= 0) throw new IllegalArgumentException("Size <= 0 is not allowed");
 
-    this.size = numComponents = size;
+    this.size = numComponents = size; //same because at the beginning all elements are root elements and are their own components
     sz = new int[size];
     id = new int[size];
 
+    // setup the ID array (and component size array)
     for (int i = 0; i < size; i++) {
       id[i] = i; // Link to itself (self root)
       sz[i] = 1; // Each component is originally of size one
