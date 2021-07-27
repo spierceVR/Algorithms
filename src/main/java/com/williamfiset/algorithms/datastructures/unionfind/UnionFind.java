@@ -64,7 +64,7 @@ public class UnionFind {
   // Return whether or not the elements 'p' and
   // 'q' are in the same components/set.
   public boolean connected(int p, int q) {
-    return find(p) == find(q);
+    return find(p) == find(q); // roots are same if the elements are in the same component
   }
 
   // Return the size of the components/set 'p' belongs to
@@ -91,13 +91,13 @@ public class UnionFind {
     int root1 = find(p);
     int root2 = find(q);
 
-    // Merge smaller component/set into the larger one.
+    // Merge smaller component/set into the larger one. (By convention)
     if (sz[root1] < sz[root2]) {
-      sz[root2] += sz[root1];
-      id[root1] = root2;
-      sz[root1] = 0;
+      sz[root2] += sz[root1]; // update size of unified component 
+      id[root1] = root2; // parent of root 1 is now root2
+      sz[root1] = 0; // size of root1 is now zero because it's not a root anymore, just an element in the unified component
     } else {
-      sz[root1] += sz[root2];
+      sz[root1] += sz[root2]; // same as if block but in the case where root1 sz > root2 sz
       id[root2] = root1;
       sz[root2] = 0;
     }
